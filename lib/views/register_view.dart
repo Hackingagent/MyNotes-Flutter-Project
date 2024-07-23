@@ -1,0 +1,100 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'dart:developer' as devtools show log;
+
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
+
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  //controllers declearation
+  late final TextEditingController _email;
+  late final TextEditingController _password;
+
+  @override
+  void initState() {
+    _email = TextEditingController();
+    _password = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Register'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Column(
+        children: [
+          //Email Field
+          TextField(
+            controller: _email, //email controller decleared above
+            enableSuggestions: false,
+            autocorrect: false,
+            keyboardType:
+                TextInputType.emailAddress, // make keyboard to appear with @
+            decoration: const InputDecoration(
+              hintText: 'Enter your Email', //placeholder
+            ),
+          ),
+
+          //Password Field
+          TextField(
+            controller: _password, //passeord controller declared above
+            obscureText:
+                true, //Make password appear in dots and not the actual text
+            enableSuggestions: false, //text suggestions un enabled
+            autocorrect: false,
+            decoration: const InputDecoration(
+              hintText: 'Enter your Password', //Like placeholder in html
+            ),
+          ),
+
+          //Regiser Button
+          TextButton(
+            onPressed: () async {
+              final email = _email.text;
+              final password = _password.text;
+              try {
+                final userCredential =
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
+
+                devtools.log(userCredential.toString());
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'weak-password') {
+                  devtools.log('Weak Password');
+                } else if (e.code == 'email-already-in-use') {
+                  devtools.log('Email is already Taken');
+                } else if (e.code == 'invalid-email') {
+                  devtools.log('Invalid Email Entered');
+                }
+              }
+            },
+            child: const Text('Register'),
+          ),
+
+          TextButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/login/', (route) => false);
+              },
+              child: const Text('Already have an account? Login Here'))
+        ],
+      ),
+    );
+  }
+}

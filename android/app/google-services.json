@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "459126458606",
+    "project_id": "flutter-first-pro-mynotes",
+    "storage_bucket": "flutter-first-pro-mynotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459126458606:android:7bf3c139c68c600c1ecbff",
+        "android_client_info": {
+          "package_name": "com.ngulefac.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5mbEIt-GBMdAOBOq-5lhh_IeoPXCWAQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
