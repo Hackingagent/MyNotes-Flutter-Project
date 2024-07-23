@@ -1,0 +1,18 @@
+Use "Ctrl ." to wrap a widget withtin another widget
+Type "stl" to create a particular type of widget
+Use Scaffold to create visually apealling content
+Use "TextEditingController to grab data and send to the database when a button is pressed (Declaration = "late final TextEditingController _varaibleName)
+
+
+GIT AND GITHUB
+
++ git init . (initializes an empty git repository)
++ git status (Show files that have not been commited yet and theose have been commited)
++ git add --all (Add all the file and folders to my git repository)
++ git commit -m "my initial commit" (Commit they files and folders)
++ git remote add origin "ssh url from the repository on github"
++ git push -u origin HEAD -f (Push the files and folders to github)
++ git log ( To see your Commits)
++ git tag "tag name" (Create a tag for your commit)
++ git push --tags (To push the tags to your github repository)
+
