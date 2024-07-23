@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:mynotes/constants/routes.dart';
+import 'package:mynotes/utilities/show_error_dialog.dart';
 
 //Type "stl" to create a widget statefull(stf) or stateless
 class LoginView extends StatefulWidget {
@@ -81,11 +80,21 @@ class _LoginViewState extends State<LoginView> {
                 );
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'invalid-credential') {
-                  devtools.log("Invalid Credentials");
+                  await showErrorDialog(
+                    context,
+                    'User Not Found',
+                  );
                 } else {
-                  devtools.log('SOMETHING ELSE HAPPENED');
-                  devtools.log(e.code);
+                  await showErrorDialog(
+                    context,
+                    'Error: ${e.code}', //putting a variable inside a string inside ""
+                  );
                 }
+              } catch (e) {
+                await showErrorDialog(
+                  context,
+                  e.toString(),
+                );
               }
             },
             child: const Text('Login'),
